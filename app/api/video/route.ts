@@ -5,9 +5,7 @@ import { NextResponse } from "next/server";
 import { incrementApiLimit, checkApiLimit } from "@/lib/api-limit";
 import { checkSubscription } from "@/lib/subscription";
 
-const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN!,
-});
+
 
 export async function POST(
     req: Request
@@ -24,6 +22,14 @@ export async function POST(
         if (!prompt) {
             return new NextResponse("Prompt is required", { status: 400 });
         }
+
+        if (!process.env.REPLICATE_API_TOKEN) {
+            return new NextResponse("Replicate API Key not configured.", { status: 500 });
+        }
+
+        const replicate = new Replicate({
+            auth: process.env.REPLICATE_API_TOKEN!,
+        });
 
         const freeTrial = await checkApiLimit();
         const isPro = await checkSubscription();
