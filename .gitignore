@@ -34,3 +34,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local Test Files
+api-test-results.txt
+available-models.txt
+test-output.txt
+check-env.js
+debug-env.js
+list-available-models.js
+test-apis-detailed.js
+test-apis.js
+test-code-gen.js
+test-conversation-fix.js
+test-models.js
+update-env.js
